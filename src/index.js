@@ -1,21 +1,11 @@
 
-import { resolve } from 'path';
+import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 
-const makeAbsolutePath = (path) => {
-  const currentDir = process.cwd();
-
-  if (path[0] === '/') {
-    return `${currentDir}${path}`;
-  }
-
-  return resolve(currentDir, path);
-};
-
 const makeDiff = (firstPath, secondPath) => {
-  const firstAblolutePath = makeAbsolutePath(firstPath);
-  const secondAblolutePath = makeAbsolutePath(secondPath);
+  const firstAblolutePath = path.resolve(process.cwd(), firstPath);
+  const secondAblolutePath = path.resolve(process.cwd(), secondPath);
 
   const firstFile = JSON.parse(fs.readFileSync(firstAblolutePath));
   const secondFile = JSON.parse(fs.readFileSync(secondAblolutePath));
