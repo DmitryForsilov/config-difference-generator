@@ -3,12 +3,15 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 
-const makeDiff = (firstPath, secondPath) => {
-  const firstAblolutePath = path.resolve(process.cwd(), firstPath);
-  const secondAblolutePath = path.resolve(process.cwd(), secondPath);
+const readFile = (filePath) => {
+  const absolutePath = path.resolve(process.cwd(), filePath);
 
-  const firstFile = JSON.parse(fs.readFileSync(firstAblolutePath));
-  const secondFile = JSON.parse(fs.readFileSync(secondAblolutePath));
+  return JSON.parse(fs.readFileSync(absolutePath));
+};
+
+const makeDiff = (firstPath, secondPath) => {
+  const firstFile = readFile(firstPath);
+  const secondFile = readFile(secondPath);
 
   const keys = [...Object.keys(firstFile), ...Object.keys(secondFile)]
     .reduce((acc, key) => (acc.includes(key) ? [...acc] : [...acc, key]), []);
