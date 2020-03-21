@@ -9,10 +9,7 @@ const readFile = (filePath) => {
   return JSON.parse(fs.readFileSync(absolutePath));
 };
 
-const makeDiff = (firstPath, secondPath) => {
-  const firstFile = readFile(firstPath);
-  const secondFile = readFile(secondPath);
-
+const render = (firstFile, secondFile) => {
   const keys = [...Object.keys(firstFile), ...Object.keys(secondFile)]
     .reduce((acc, key) => (acc.includes(key) ? [...acc] : [...acc, key]), []);
 
@@ -32,6 +29,13 @@ const makeDiff = (firstPath, secondPath) => {
   }, []);
 
   return `{\n${result.join('')}}`;
+};
+
+const makeDiff = (firstPath, secondPath) => {
+  const firstFile = readFile(firstPath);
+  const secondFile = readFile(secondPath);
+
+  return render(firstFile, secondFile);
 };
 
 export default makeDiff;
