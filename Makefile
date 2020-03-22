@@ -10,5 +10,8 @@ lint:
 test:
 	npx jest
 
+watch:
+	npx jest --watch
+	
 coverage:
 	npx jest --coverage

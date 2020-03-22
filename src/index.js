@@ -1,13 +1,5 @@
-
-import path from 'path';
-import fs from 'fs';
 import _ from 'lodash';
-
-const readFile = (filePath) => {
-  const absolutePath = path.resolve(process.cwd(), filePath);
-
-  return JSON.parse(fs.readFileSync(absolutePath));
-};
+import parsers from './parsers.js';
 
 const render = (firstFile, secondFile) => {
   const keys = [...Object.keys(firstFile), ...Object.keys(secondFile)]
@@ -32,8 +24,8 @@ const render = (firstFile, secondFile) => {
 };
 
 const makeDiff = (firstPath, secondPath) => {
-  const firstFile = readFile(firstPath);
-  const secondFile = readFile(secondPath);
+  const firstFile = parsers(firstPath);
+  const secondFile = parsers(secondPath);
 
   return render(firstFile, secondFile);
 };
