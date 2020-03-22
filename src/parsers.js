@@ -1,13 +1,25 @@
 import path from 'path';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import ini from 'ini';
 
-const parsers = (filePath) => {
-  const absolutePath = path.resolve(process.cwd(), filePath);
+const parsers = (fileName) => {
+  const absolutePath = path.resolve(process.cwd(), '__fixtures__', fileName);
   const format = path.extname(absolutePath);
-  const data = fs.readFileSync(absolutePath);
+  const data = fs.readFileSync(absolutePath, 'utf-8');
 
-  return (format === 'json') ? JSON.parse(data) : yaml.safeLoad(data);
+  switch (format) {
+    case '.json':
+      return JSON.parse(data);
+    case '.yml':
+      return yaml.safeLoad(data);
+    case '.ini':
+      return ini.parse(data);
+    default:
+      break;
+  }
+
+  return `${fileName} file has unsupported format`;
 };
 
 export default parsers;
