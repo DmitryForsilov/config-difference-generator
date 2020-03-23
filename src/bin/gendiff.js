@@ -6,7 +6,7 @@ import makeDiff from '../index.js';
 const program = new commander.Command();
 
 program
-  .version('1.3.1')
+  .version('1.4.1')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format');
 
