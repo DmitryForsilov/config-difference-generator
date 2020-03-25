@@ -11,12 +11,12 @@ npm link
 
 ## JSON difference
 
-[![asciicast](https://asciinema.org/a/Ce1czQk4MZuFmhxETMIk891Xk.svg)](https://asciinema.org/a/Ce1czQk4MZuFmhxETMIk891Xk)
+[![asciicast](https://asciinema.org/a/lhCuz7ACu00eyobGqouelrhBy.svg)](https://asciinema.org/a/lhCuz7ACu00eyobGqouelrhBy)
 
 ## YAML difference
 
-[![asciicast](https://asciinema.org/a/luLbZHmrWTfJ4wdlqpPQcVlje.svg)](https://asciinema.org/a/luLbZHmrWTfJ4wdlqpPQcVlje)
+[![asciicast](https://asciinema.org/a/GE4N71KmtCg57dXQw9H2zIyYQ.svg)](https://asciinema.org/a/GE4N71KmtCg57dXQw9H2zIyYQ)
 
 ## INI difference
 
-[![asciicast](https://asciinema.org/a/DEp6ndTRdRuFuyM6h3kEzWHDm.svg)](https://asciinema.org/a/DEp6ndTRdRuFuyM6h3kEzWHDm)
+[![asciicast](https://asciinema.org/a/1GiNIjA9cbIe8O3QyhErLTn72.svg)](https://asciinema.org/a/1GiNIjA9cbIe8O3QyhErLTn72)
