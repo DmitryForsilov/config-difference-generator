@@ -1,21 +1,21 @@
 const ast = {
   common: {
-    status: 'contentModified',
+    status: 'unchanged',
     value: {
       follow: { status: 'added', value: false },
-      setting1: { status: 'unmodified', value: 'Value 1' },
+      setting1: { status: 'unchanged', value: 'Value 1' },
       setting2: { status: 'deleted', value: 200 },
       setting3: {
-        status: 'valueModified',
+        status: 'changed',
         newValue: {
           key: 'value',
         },
         oldValue: true,
       },
       setting6: {
-        status: 'contentModified',
+        status: 'unchanged',
         value: {
-          key: { status: 'unmodified', value: 'value' },
+          key: { status: 'unchanged', value: 'value' },
           ops: { status: 'added', value: 'vops' },
         },
       },
@@ -29,12 +29,12 @@ const ast = {
     },
   },
   group1: {
-    status: 'contentModified',
+    status: 'unchanged',
     value: {
-      baz: { status: 'valueModified', newValue: 'bars', oldValue: 'bas' },
-      foo: { status: 'unmodified', value: 'bar' },
+      baz: { status: 'changed', newValue: 'bars', oldValue: 'bas' },
+      foo: { status: 'unchanged', value: 'bar' },
       nest: {
-        status: 'valueModified',
+        status: 'changed',
         newValue: 'str',
         oldValue: {
           key: 'value',

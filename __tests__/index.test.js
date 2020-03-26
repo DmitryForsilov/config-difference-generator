@@ -1,10 +1,19 @@
 import makeDiff from '../src/index.js';
-import result from '../__fixtures__/result.js';
+import resultDefault from '../__fixtures__/resultDefault.js';
+import resultPlain from '../__fixtures__/resultPlain.js';
 
 test.each([
   ['before.json', 'after.json'],
   ['before.yml', 'after.yml'],
   ['before.ini', 'after.ini'],
-])('makeDiff', (before, after) => {
-  expect(makeDiff(before, after)).toBe(result);
+])('makeDiffRenderDefault', (before, after) => {
+  expect(makeDiff(before, after, 'default')).toBe(resultDefault);
+});
+
+test.each([
+  ['before.json', 'after.json'],
+  ['before.yml', 'after.yml'],
+  ['before.ini', 'after.ini'],
+])('makeDiffRenderPlain', (before, after) => {
+  expect(makeDiff(before, after, 'plain')).toBe(resultPlain);
 });

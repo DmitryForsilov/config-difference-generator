@@ -10,13 +10,13 @@ const makeAst = (first, second) => {
     const firstValue = first[key];
     const secondValue = second[key];
 
-    const unmodified = { status: 'unmodified', value: firstValue };
-    const valueModified = { status: 'valueModified', newValue: secondValue, oldValue: firstValue };
+    const unmodified = { status: 'unchanged', value: firstValue };
+    const valueModified = { status: 'changed', newValue: secondValue, oldValue: firstValue };
     const deleted = { status: 'deleted', value: firstValue };
     const added = { status: 'added', value: secondValue };
 
     if (isObject(firstValue) && isObject(secondValue) && !isEqual(firstValue, secondValue)) {
-      return { ...acc, [key]: { status: 'contentModified', value: makeAst(firstValue, secondValue) } };
+      return { ...acc, [key]: { status: 'unchanged', value: makeAst(firstValue, secondValue) } };
     }
 
     if (_.has(first, key) && _.has(second, key)) {
