@@ -11,7 +11,8 @@
     "dist"
   ],
   "keywords": [
-    "parser",
+    "yaml",
+    "ini",
     "json",
     "difference"
   ],
@@ -45,7 +46,7 @@
     "type": "git",
     "url": "git+https://github.com/Dmitry-dotcom/frontend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Dmitry Forsilov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Dmitry-dotcom/frontend-project-lvl2/issues"

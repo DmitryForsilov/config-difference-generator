@@ -21,7 +21,7 @@ gendiff -f [format] <first-config> <second-config>
  - [YAML](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#yaml-difference)
  - [INI](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#ini-difference)
 
-## Formats
+## Format display
  - [Default](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#default)
  - [Plain](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#plain)
  - [Json](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#json)
@@ -38,14 +38,14 @@ gendiff -f [format] <first-config> <second-config>
 
 [![asciicast](https://asciinema.org/a/LBOHvgOi4rmFoaRp86ORwp58Y.svg)](https://asciinema.org/a/LBOHvgOi4rmFoaRp86ORwp58Y)
 
-# Default
+## Default
 
 [![asciicast](https://asciinema.org/a/AcdxlPbDbcRPQYuyK7E4g3ABR.svg)](https://asciinema.org/a/AcdxlPbDbcRPQYuyK7E4g3ABR)
 
-# Plain
+## Plain
 
 [![asciicast](https://asciinema.org/a/tsEj55MBcKddrtGlutBZKTjxZ.svg)](https://asciinema.org/a/tsEj55MBcKddrtGlutBZKTjxZ)
 
-# Json
+## Json
 
 [![asciicast](https://asciinema.org/a/eVMjePkJ3NwcS9TGvOwMjrfBO.svg)](https://asciinema.org/a/eVMjePkJ3NwcS9TGvOwMjrfBO)
