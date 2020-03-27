@@ -1,7 +1,21 @@
 import _ from 'lodash';
 
 const isObject = (data) => data instanceof Object;
-const isEqual = (a, b) => a === b;
+
+const templates = {
+  unchanged(val) {
+    return { status: 'unchanged', value: val };
+  },
+  changed(newVal, oldVal) {
+    return { status: 'changed', newValue: newVal, oldValue: oldVal };
+  },
+  deleted(val) {
+    return { status: 'deleted', value: val };
+  },
+  added(val) {
+    return { status: 'added', value: val };
+  },
+};
 
 const makeAst = (first, second) => {
   const uniqKeys = _.uniq([...Object.keys(first), ...Object.keys(second)]).sort();
@@ -10,25 +24,21 @@ const makeAst = (first, second) => {
     const firstValue = first[key];
     const secondValue = second[key];
 
-    const unmodified = { status: 'unchanged', value: firstValue };
-    const valueModified = { status: 'changed', newValue: secondValue, oldValue: firstValue };
-    const deleted = { status: 'deleted', value: firstValue };
-    const added = { status: 'added', value: secondValue };
-
-    if (isObject(firstValue) && isObject(secondValue) && !isEqual(firstValue, secondValue)) {
-      return { ...acc, [key]: { status: 'unchanged', value: makeAst(firstValue, secondValue) } };
+    if (isObject(firstValue) && isObject(secondValue) && !(firstValue === secondValue)) {
+      return { ...acc, [key]: templates.unchanged(makeAst(firstValue, secondValue)) };
     }
 
     if (_.has(first, key) && _.has(second, key)) {
-      if (isEqual(firstValue, secondValue)) {
-        return { ...acc, [key]: unmodified };
+      if (firstValue === secondValue) {
+        return { ...acc, [key]: templates.unchanged(firstValue) };
       }
-
-      return { ...acc, [key]: valueModified };
+      return { ...acc, [key]: templates.changed(secondValue, firstValue) };
     }
 
-    return _.has(first, key) ? { ...acc, [key]: deleted }
-      : { ...acc, [key]: added };
+    if (_.has(first, key)) {
+      return { ...acc, [key]: templates.deleted(firstValue) };
+    }
+    return { ...acc, [key]: templates.added(secondValue) };
   }, {});
 
   return result;

@@ -14,21 +14,21 @@ const renderDefault = (ast, spacesCount = 4) => {
 
     switch (status) {
       case 'unchanged':
-        return [...acc, `${spaces(spacesCount)}${key}: ${renderDefault(value, spacesCount + 4)}\n`];
+        return [...acc, `${spaces(spacesCount)}${key}: ${renderDefault(value, spacesCount + 4)}`];
       case 'changed':
-        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderDefault(newValue, spacesCount + 4)}\n${spaces(spacesCount - 2)}- ${key}: ${renderDefault(oldValue, spacesCount + 4)}\n`];
+        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderDefault(newValue, spacesCount + 4)}\n${spaces(spacesCount - 2)}- ${key}: ${renderDefault(oldValue, spacesCount + 4)}`];
       case 'added':
-        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderDefault(value, spacesCount + 4)}\n`];
+        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderDefault(value, spacesCount + 4)}`];
       case 'deleted':
-        return [...acc, `${spaces(spacesCount - 2)}- ${key}: ${renderDefault(value, spacesCount + 4)}\n`];
+        return [...acc, `${spaces(spacesCount - 2)}- ${key}: ${renderDefault(value, spacesCount + 4)}`];
       default:
         break;
     }
 
-    return [...acc, `${spaces(spacesCount)}${key}: ${ast[key]}\n`];
+    return [...acc, `${spaces(spacesCount)}${key}: ${ast[key]}`];
   }, []);
 
-  return `{\n${result.join('')}${spaces(spacesCount - 4)}}`;
+  return `{\n${result.join('\n')}\n${spaces(spacesCount - 4)}}`;
 };
 
 export default renderDefault;
