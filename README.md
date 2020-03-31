@@ -5,7 +5,7 @@
 # frontend-project-lvl2
 ## Difference Calculator
 
-This program compares two config files and displays the difference in three formats.
+Compares two configuration files and shows a difference in three formats.
 Supported config file types: JSON, YAML and INI.
 
 ## Install
