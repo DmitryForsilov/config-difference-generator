@@ -1,33 +1,26 @@
 import path from 'path';
 import fs from 'fs';
-import parsers from './parsers.js';
+import getParser from './getParser.js';
 import makeAst from './makeAst.js';
-import renderDefault from './formatters/renderDefault.js';
-import renderPlain from './formatters/renderPlain.js';
-import renderJson from './formatters/renderJson.js';
+import getFormatter from './formatters/index.js';
 
-const getData = (fileName) => {
+const getParsedData = (fileName) => {
   const absolutePath = path.resolve(process.cwd(), '__fixtures__', fileName);
   const extension = path.extname(fileName);
   const fileData = fs.readFileSync(absolutePath, 'utf-8');
+  const parse = getParser(extension);
 
-  return { fileData, extension };
+  return parse(fileData);
 };
 
-const formatters = {
-  default: renderDefault,
-  plain: renderPlain,
-  json: renderJson,
-};
+const makeDiff = (firstConfig, secondConfig, format) => {
+  const firstData = getParsedData(firstConfig);
+  const secondData = getParsedData(secondConfig);
 
-const makeDiff = (first, second, format) => {
-  const firstData = getData(first);
-  const secondData = getData(second);
+  const ast = makeAst(firstData, secondData);
+  const makeOutput = getFormatter(format);
 
-  const ast = makeAst(parsers(firstData), parsers(secondData));
-  const formatter = formatters[format];
-
-  return formatter(ast);
+  return makeOutput(ast);
 };
 
 export default makeDiff;

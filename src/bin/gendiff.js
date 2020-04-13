@@ -8,7 +8,7 @@ const program = new commander.Command();
 program
   .version('1.7.1')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'output format: plain, json or', 'default');
+  .option('-f, --format [type]', 'output format: tree, plain or json', 'tree');
 
 program.arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
