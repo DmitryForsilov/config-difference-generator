@@ -1,34 +1,51 @@
 
-const spaces = (count) => `${' '.repeat(count)}`;
+const makeSpaces = (count) => `${' '.repeat(count)}`;
+const indent = 4;
 
-const renderTree = (ast, spacesCount = 4) => {
-  if (!(ast instanceof Object)) {
-    return ast;
+const stringify = (value, spacesCount) => {
+  if (!(value instanceof Object)) {
+    return value;
   }
 
-  const keys = Object.keys(ast).sort();
+  const keys = Object.keys(value);
 
-  const result = keys.reduce((acc, key) => {
-    const { status, value } = ast[key];
-    const { newValue, oldValue } = ast[key];
+  return keys.map((key) => {
+    const currentValue = value[key];
 
-    switch (status) {
+    return `{\n${makeSpaces(spacesCount)}${key}: ${currentValue}\n${makeSpaces(spacesCount - indent)}}`;
+  });
+};
+
+const renderTree = (ast, spacesCount = indent) => {
+  const result = ast.map((node) => {
+    const {
+      name,
+      type,
+      value,
+      newValue,
+      oldValue,
+      children,
+    } = node;
+
+    switch (type) {
+      case 'nested':
+        return `${makeSpaces(spacesCount)}${name}: ${renderTree(children, spacesCount + indent)}`;
       case 'unchanged':
-        return [...acc, `${spaces(spacesCount)}${key}: ${renderTree(value, spacesCount + 4)}`];
+        return `${makeSpaces(spacesCount)}${name}: ${stringify(value, spacesCount + indent)}`;
       case 'changed':
-        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderTree(newValue, spacesCount + 4)}\n${spaces(spacesCount - 2)}- ${key}: ${renderTree(oldValue, spacesCount + 4)}`];
+        return `${makeSpaces(spacesCount - (indent / 2))}+ ${name}: ${stringify(newValue, spacesCount + indent)}\n${makeSpaces(spacesCount - (indent / 2))}- ${name}: ${stringify(oldValue, spacesCount + indent)}`;
       case 'added':
-        return [...acc, `${spaces(spacesCount - 2)}+ ${key}: ${renderTree(value, spacesCount + 4)}`];
+        return `${makeSpaces(spacesCount - (indent / 2))}+ ${name}: ${stringify(value, spacesCount + indent)}`;
       case 'deleted':
-        return [...acc, `${spaces(spacesCount - 2)}- ${key}: ${renderTree(value, spacesCount + 4)}`];
+        return `${makeSpaces(spacesCount - (indent / 2))}- ${name}: ${stringify(value, spacesCount + indent)}`;
       default:
         break;
     }
 
-    return [...acc, `${spaces(spacesCount)}${key}: ${ast[key]}`];
-  }, []);
+    return `ERROR: unknown node type - ${type}`;
+  });
 
-  return `{\n${result.join('\n')}\n${spaces(spacesCount - 4)}}`;
+  return `{\n${result.join('\n')}\n${makeSpaces(spacesCount - indent)}}`;
 };
 
 export default renderTree;

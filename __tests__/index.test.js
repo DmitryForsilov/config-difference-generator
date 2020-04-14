@@ -21,5 +21,5 @@ test.each([
 ])('makeDiff', (before, after) => {
   expect(makeDiff(before, after, 'tree')).toBe(resultTree);
   expect(makeDiff(before, after, 'plain')).toBe(resultPlain);
-  expect(JSON.parse(makeDiff(before, after, 'json'))).toStrictEqual(JSON.parse(resultJson));
+  expect((makeDiff(before, after, 'json'))).toBe((resultJson));
 });

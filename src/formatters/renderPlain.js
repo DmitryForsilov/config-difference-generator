@@ -1,5 +1,4 @@
 
-const isObject = (data) => data instanceof Object;
 const stringify = (value) => {
   if (value instanceof Object) {
     return '[complex value]';
@@ -11,32 +10,40 @@ const stringify = (value) => {
   return value;
 };
 
-const renderPlain = (ast, ancestor = '') => {
-  const validAncestor = ancestor === '' ? '' : `${ancestor}.`;
+const renderPlain = (ast, prefix = '') => {
+  const validPrefix = prefix === '' ? '' : `${prefix}.`;
 
-  const keys = Object.keys(ast).sort();
+  const result = ast.map((node) => {
+    const {
+      name,
+      type,
+      value,
+      newValue,
+      oldValue,
+      children,
+    } = node;
 
-  const result = keys.reduce((acc, key) => {
-    const { status, value } = ast[key];
-    const { newValue, oldValue } = ast[key];
-
-    if (status === 'unchanged' && isObject(value)) {
-      return [...acc, `${renderPlain(value, `${validAncestor}${key}`)}`];
+    switch (type) {
+      case 'nested':
+        return `${renderPlain(children, `${validPrefix}${name}`)}`;
+      case 'unchanged':
+        return null;
+      case 'changed':
+        return `Property '${validPrefix}${name}' was changed from ${stringify(oldValue)} to ${stringify(newValue)}`;
+      case 'added':
+        return `Property '${validPrefix}${name}' was added with value: ${stringify(value)}`;
+      case 'deleted':
+        return `Property '${validPrefix}${name}' was deleted`;
+      default:
+        break;
     }
-    if (status === 'changed') {
-      return [...acc, `Property '${validAncestor}${key}' was changed from ${stringify(oldValue)} to ${stringify(newValue)}`];
-    }
-    if (status === 'added') {
-      return [...acc, `Property '${validAncestor}${key}' was added with value: ${stringify(value)}`];
-    }
-    if (status === 'deleted') {
-      return [...acc, `Property '${validAncestor}${key}' was deleted`];
-    }
 
-    return acc;
-  }, []);
+    return `ERROR: unknown node type - ${type}`;
+  });
 
-  return result.join('\n');
+  return result
+    .filter((item) => item !== null)
+    .join('\n');
 };
 
 export default renderPlain;

@@ -3,46 +3,55 @@ import _ from 'lodash';
 
 const isObject = (data) => data instanceof Object;
 
-const templates = {
-  unchanged(val) {
-    return { status: 'unchanged', value: val };
+const nodes = {
+  nested(name, children) {
+    return { name, type: 'nested', children };
   },
-  changed(newVal, oldVal) {
-    return { status: 'changed', newValue: newVal, oldValue: oldVal };
+
+  unchanged(name, value) {
+    return { name, type: 'unchanged', value };
   },
-  deleted(val) {
-    return { status: 'deleted', value: val };
+
+  changed(name, newValue, oldValue) {
+    return {
+      name, type: 'changed', newValue, oldValue,
+    };
   },
-  added(val) {
-    return { status: 'added', value: val };
+
+  deleted(name, value) {
+    return { name, type: 'deleted', value };
+  },
+
+  added(name, value) {
+    return { name, type: 'added', value };
   },
 };
 
 const makeAst = (firstConfig, secondConfig) => {
-  const keys = _.union(Object.keys(firstConfig), Object.keys(secondConfig)).sort();
+  const keys = _.union(Object.keys(firstConfig), Object.keys(secondConfig));
 
-  const result = keys.reduce((acc, key) => {
+  const result = keys.map((key) => {
     const firstValue = firstConfig[key];
     const secondValue = secondConfig[key];
 
-    if (isObject(firstValue) && isObject(secondValue)) {
-      return { ...acc, [key]: templates.unchanged(makeAst(firstValue, secondValue)) };
+    if (_.isEqual(firstValue, secondValue)) {
+      return nodes.unchanged(key, firstValue);
     }
 
-    if (_.has(firstConfig, key) && _.has(secondConfig, key)) {
-      if (firstValue === secondValue) {
-        return { ...acc, [key]: templates.unchanged(firstValue) };
-      }
-      if (!(firstValue === secondValue)) {
-        return { ...acc, [key]: templates.changed(secondValue, firstValue) };
-      }
+    if (isObject(firstValue) && isObject(secondValue)) {
+      return nodes.nested(key, makeAst(firstValue, secondValue));
+    }
+
+    if (_.has(firstConfig, key) && _.has(secondConfig, key) && !(firstValue === secondValue)) {
+      return nodes.changed(key, secondValue, firstValue);
     }
 
     if (_.has(firstConfig, key)) {
-      return { ...acc, [key]: templates.deleted(firstValue) };
+      return nodes.deleted(key, firstValue);
     }
-    return { ...acc, [key]: templates.added(secondValue) };
-  }, {});
+
+    return nodes.added(key, secondValue);
+  });
 
   return result;
 };
