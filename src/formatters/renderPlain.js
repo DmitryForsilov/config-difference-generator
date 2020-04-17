@@ -35,10 +35,8 @@ const renderPlain = (ast, prefix = '') => {
       case 'deleted':
         return `Property '${validPrefix}${name}' was deleted`;
       default:
-        break;
+        throw new Error(`ERROR: unknown node type - ${type}`);
     }
-
-    return `ERROR: unknown node type - ${type}`;
   });
 
   return result

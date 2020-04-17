@@ -39,10 +39,8 @@ const renderTree = (ast, spacesCount = indent) => {
       case 'deleted':
         return `${makeSpaces(spacesCount - (indent / 2))}- ${name}: ${stringify(value, spacesCount + indent)}`;
       default:
-        break;
+        throw new Error(`ERROR: unknown node type - ${type}`);
     }
-
-    return `ERROR: unknown node type - ${type}`;
   });
 
   return `{\n${result.join('\n')}\n${makeSpaces(spacesCount - indent)}}`;

@@ -10,6 +10,14 @@ const makeAst = (firstConfig, secondConfig) => {
     const firstValue = firstConfig[key];
     const secondValue = secondConfig[key];
 
+    if (_.has(firstConfig, key) && !_.has(secondConfig, key)) {
+      return { name: key, type: 'deleted', value: firstValue };
+    }
+
+    if (!_.has(firstConfig, key) && _.has(secondConfig, key)) {
+      return { name: key, type: 'added', value: secondValue };
+    }
+
     if (isObject(firstValue) && isObject(secondValue)) {
       return { name: key, type: 'nested', children: makeAst(firstValue, secondValue) };
     }
@@ -18,17 +26,9 @@ const makeAst = (firstConfig, secondConfig) => {
       return { name: key, type: 'unchanged', value: firstValue };
     }
 
-    if (_.has(firstConfig, key) && _.has(secondConfig, key)) {
-      return {
-        name: key, type: 'changed', newValue: secondValue, oldValue: firstValue,
-      };
-    }
-
-    if (_.has(firstConfig, key)) {
-      return { name: key, type: 'deleted', value: firstValue };
-    }
-
-    return { name: key, type: 'added', value: secondValue };
+    return {
+      name: key, type: 'changed', newValue: secondValue, oldValue: firstValue,
+    };
   });
 };
 
