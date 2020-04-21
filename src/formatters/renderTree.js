@@ -1,8 +1,8 @@
 
-const makeSpaces = (count) => `${' '.repeat(count)}`;
-const indent = 4;
+const makeIndent = (count) => `${' '.repeat(count)}`;
+const defaultIndent = 4;
 
-const stringify = (value, spacesCount) => {
+const stringify = (value, depth) => {
   if (!(value instanceof Object)) {
     return value;
   }
@@ -12,11 +12,11 @@ const stringify = (value, spacesCount) => {
   return keys.map((key) => {
     const currentValue = value[key];
 
-    return `{\n${makeSpaces(spacesCount)}${key}: ${currentValue}\n${makeSpaces(spacesCount - indent)}}`;
+    return `{\n${makeIndent(defaultIndent * depth)}${key}: ${currentValue}\n${makeIndent((defaultIndent * depth) - defaultIndent)}}`;
   });
 };
 
-const renderTree = (ast, spacesCount = indent) => {
+const renderTree = (ast, depth = 1) => {
   const result = ast.map((node) => {
     const {
       name,
@@ -29,21 +29,21 @@ const renderTree = (ast, spacesCount = indent) => {
 
     switch (type) {
       case 'nested':
-        return `${makeSpaces(spacesCount)}${name}: ${renderTree(children, spacesCount + indent)}`;
+        return `${makeIndent(defaultIndent * depth)}${name}: ${renderTree(children, depth + 1)}`;
       case 'unchanged':
-        return `${makeSpaces(spacesCount)}${name}: ${stringify(value, spacesCount + indent)}`;
+        return `${makeIndent(defaultIndent * depth)}${name}: ${stringify(value, depth + 1)}`;
       case 'changed':
-        return `${makeSpaces(spacesCount - (indent / 2))}+ ${name}: ${stringify(newValue, spacesCount + indent)}\n${makeSpaces(spacesCount - (indent / 2))}- ${name}: ${stringify(oldValue, spacesCount + indent)}`;
+        return `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}+ ${name}: ${stringify(newValue, depth + 1)}\n${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}- ${name}: ${stringify(oldValue, depth + 1)}`;
       case 'added':
-        return `${makeSpaces(spacesCount - (indent / 2))}+ ${name}: ${stringify(value, spacesCount + indent)}`;
+        return `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}+ ${name}: ${stringify(value, depth + 1)}`;
       case 'deleted':
-        return `${makeSpaces(spacesCount - (indent / 2))}- ${name}: ${stringify(value, spacesCount + indent)}`;
+        return `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}- ${name}: ${stringify(value, depth + 1)}`;
       default:
         throw new Error(`ERROR: unknown node type - ${type}`);
     }
   });
 
-  return `{\n${result.join('\n')}\n${makeSpaces(spacesCount - indent)}}`;
+  return `{\n${result.join('\n')}\n${makeIndent((defaultIndent * depth) - defaultIndent)}}`;
 };
 
 export default renderTree;

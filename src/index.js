@@ -6,10 +6,10 @@ import getFormatter from './formatters/index.js';
 
 const getFileData = (fileName) => {
   const absolutePath = path.resolve(process.cwd(), '__fixtures__', fileName);
-  const extension = path.extname(fileName);
-  const data = fs.readFileSync(absolutePath, 'utf-8');
+  const type = path.extname(fileName).slice(1);
+  const content = fs.readFileSync(absolutePath, 'utf-8');
 
-  return { data, extension };
+  return { content, type };
 };
 
 const makeDiff = (firstConfig, secondConfig, format) => {

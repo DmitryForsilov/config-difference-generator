@@ -25,7 +25,7 @@ const renderPlain = (ast, prefix = '') => {
 
     switch (type) {
       case 'nested':
-        return `${renderPlain(children, `${validPrefix}${name}`)}`;
+        return renderPlain(children, `${validPrefix}${name}`);
       case 'unchanged':
         return null;
       case 'changed':
