@@ -12,9 +12,9 @@ const getFileData = (fileName) => {
   return { content, type };
 };
 
-const makeDiff = (firstConfig, secondConfig, format) => {
-  const firstData = getFileData(firstConfig);
-  const secondData = getFileData(secondConfig);
+const makeDiff = (firstFileName, secondFileName, format) => {
+  const firstData = getFileData(firstFileName);
+  const secondData = getFileData(secondFileName);
 
   const ast = makeAst(parse(firstData), parse(secondData));
   const makeOutput = getFormatter(format);
