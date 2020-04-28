@@ -27,16 +27,17 @@ const renderTree = (ast, depth = 1) => {
       children,
     } = node;
 
-    const strWithNewVal = `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}+ ${name}: ${stringify(newValue, depth + 1)}`;
-    const strWithOldVal = `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}- ${name}: ${stringify(oldValue, depth + 1)}`;
-
     switch (type) {
       case 'nested':
         return `${makeIndent(defaultIndent * depth)}${name}: ${renderTree(children, depth + 1)}`;
       case 'unchanged':
         return `${makeIndent(defaultIndent * depth)}${name}: ${stringify(value, depth + 1)}`;
       case 'changed':
-        return `${strWithNewVal}\n${strWithOldVal}`;
+        // пришлось отключить правило no-case-declarations для линтера
+        const stringWithPlus = `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}+ ${name}: ${stringify(newValue, depth + 1)}`;
+        const stringWithMinus = `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}- ${name}: ${stringify(oldValue, depth + 1)}`;
+
+        return `${stringWithPlus}\n${stringWithMinus}`;
       case 'added':
         return `${makeIndent((defaultIndent * depth) - (defaultIndent / 2))}+ ${name}: ${stringify(value, depth + 1)}`;
       case 'deleted':
