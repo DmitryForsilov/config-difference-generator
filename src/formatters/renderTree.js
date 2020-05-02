@@ -33,11 +33,12 @@ const renderTree = (ast, depth = 1) => {
       case 'unchanged':
         return `${makeIndent(defaultIndent * depth)}${name}: ${stringify(value, depth + 1)}`;
       case 'changed':
-        // пришлось отключить правило no-case-declarations для линтера
+      {
         const stringWithPlus = `${makeIndent((defaultIndent * depth) - 2)}+ ${name}: ${stringify(newValue, depth + 1)}`;
         const stringWithMinus = `${makeIndent((defaultIndent * depth) - 2)}- ${name}: ${stringify(oldValue, depth + 1)}`;
 
         return `${stringWithPlus}\n${stringWithMinus}`;
+      }
       case 'added':
         return `${makeIndent((defaultIndent * depth) - 2)}+ ${name}: ${stringify(value, depth + 1)}`;
       case 'deleted':

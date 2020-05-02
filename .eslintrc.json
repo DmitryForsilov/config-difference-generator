@@ -18,7 +18,6 @@
         "sourceType": "module"
     },
     "rules": {
-      "no-case-declarations":"off",
       "strict": 0,
       "no-console": 0,
       "import/extensions": 0,
