@@ -44,12 +44,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dmitry-dotcom/frontend-project-lvl2.git"
+    "url": "git+https://github.com/DmitryForsilov/frontend-project-lvl2.git"
   },
   "author": "Dmitry Forsilov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Dmitry-dotcom/frontend-project-lvl2/issues"
+    "url": "https://github.com/DmitryForsilov/frontend-project-lvl2/issues"
   },
-  "homepage": "https://github.com/Dmitry-dotcom/frontend-project-lvl2#readme"
+  "homepage": "https://github.com/DmitryForsilov/frontend-project-lvl2#readme"
 }

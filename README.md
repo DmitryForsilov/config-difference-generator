@@ -1,6 +1,6 @@
-![Node CI](https://github.com/Dmitry-dotcom/frontend-project-lvl1/workflows/Node%20CI/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b05948a803d4178ff0ac/maintainability)](https://codeclimate.com/github/Dmitry-dotcom/frontend-project-lvl2/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/b05948a803d4178ff0ac/test_coverage)](https://codeclimate.com/github/Dmitry-dotcom/frontend-project-lvl2/test_coverage)
+![Node CI](https://github.com/DmitryForsilov/frontend-project-lvl1/workflows/Node%20CI/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b05948a803d4178ff0ac/maintainability)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b05948a803d4178ff0ac/test_coverage)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/test_coverage)
 
 # frontend-project-lvl2
 ## Difference Calculator
@@ -17,14 +17,14 @@ npm link
 gendiff -f [format] <first-config> <second-config>
 ```
 ## Difference
- - [JSON](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#json-difference)
- - [YAML](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#yaml-difference)
- - [INI](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#ini-difference)
+ - [JSON](https://github.com/DmitryForsilov/frontend-project-lvl2/#json-difference)
+ - [YAML](https://github.com/DmitryForsilov/frontend-project-lvl2/#yaml-difference)
+ - [INI](https://github.com/DmitryForsilov/frontend-project-lvl2/#ini-difference)
 
 ## Format display
- - [Default](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#default)
- - [Plain](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#plain)
- - [Json](https://github.com/Dmitry-dotcom/frontend-project-lvl2/#json)
+ - [Default](https://github.com/DmitryForsilov/frontend-project-lvl2/#default)
+ - [Plain](https://github.com/DmitryForsilov/frontend-project-lvl2/#plain)
+ - [Json](https://github.com/DmitryForsilov/frontend-project-lvl2/#json)
 
 ## JSON difference
 
