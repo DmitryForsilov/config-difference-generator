@@ -4,9 +4,9 @@ import parse from './parse.js';
 import createAst from './createAst.js';
 import getFormatter from './formatters/index.js';
 
-const getParsedData = (fileName) => {
-  const absolutePath = path.resolve(process.cwd(), '__fixtures__', fileName);
-  const type = path.extname(fileName).slice(1);
+const getParsedData = (filePath) => {
+  const absolutePath = path.resolve(process.cwd(), filePath);
+  const type = path.extname(filePath).slice(1);
   const content = fs.readFileSync(absolutePath, 'utf-8');
 
   return parse(content, type);
