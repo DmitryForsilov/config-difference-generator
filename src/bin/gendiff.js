@@ -4,7 +4,7 @@ import program from 'commander';
 import makeDiff from '../index.js';
 
 program
-  .version('1.7.1')
+  .version('0.7.1')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format: tree, plain or json', 'tree')
   .arguments('<firstConfig> <secondConfig>')

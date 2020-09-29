@@ -1,9 +1,8 @@
-![Node CI](https://github.com/DmitryForsilov/frontend-project-lvl1/workflows/Node%20CI/badge.svg)
+![Node CI](https://github.com/DmitryForsilov/config-difference-generator/workflows/Node%20CI/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/57ef88734892ef7d5847/maintainability)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/57ef88734892ef7d5847/test_coverage)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/test_coverage)
 
-# frontend-project-lvl2
-## Difference Generator
+## Config Difference Generator
 
 Compares two configuration files and shows a difference in three formats.
 Supported config file types: JSON, YAML and INI.
@@ -17,14 +16,14 @@ npm link
 gendiff -f [format] <first-config> <second-config>
 ```
 ## Difference
- - [JSON](https://github.com/DmitryForsilov/frontend-project-lvl2/#json-difference)
- - [YAML](https://github.com/DmitryForsilov/frontend-project-lvl2/#yaml-difference)
- - [INI](https://github.com/DmitryForsilov/frontend-project-lvl2/#ini-difference)
+ - [JSON](https://github.com/DmitryForsilov/config-difference-generator/#json-difference)
+ - [YAML](https://github.com/DmitryForsilov/config-difference-generator/#yaml-difference)
+ - [INI](https://github.com/DmitryForsilov/config-difference-generator/#ini-difference)
 
 ## Format display
- - [Default](https://github.com/DmitryForsilov/frontend-project-lvl2/#default)
- - [Plain](https://github.com/DmitryForsilov/frontend-project-lvl2/#plain)
- - [Json](https://github.com/DmitryForsilov/frontend-project-lvl2/#json)
+ - [Default](https://github.com/DmitryForsilov/config-difference-generator/#default)
+ - [Plain](https://github.com/DmitryForsilov/config-difference-generator/#plain)
+ - [Json](https://github.com/DmitryForsilov/config-difference-generator/#json)
 
 ## JSON difference
 
