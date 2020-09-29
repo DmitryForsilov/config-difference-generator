@@ -1,6 +1,6 @@
-![Node CI](https://github.com/DmitryForsilov/config-difference-generator/workflows/Node%20CI/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/57ef88734892ef7d5847/maintainability)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/57ef88734892ef7d5847/test_coverage)](https://codeclimate.com/github/DmitryForsilov/frontend-project-lvl2/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8baf51a1b2d7ac4add34/maintainability)](https://codeclimate.com/github/DmitryForsilov/config-difference-generator/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8baf51a1b2d7ac4add34/test_coverage)](https://codeclimate.com/github/DmitryForsilov/config-difference-generator/test_coverage)
+![Node.js CI](https://github.com/DmitryForsilov/config-difference-generator/workflows/Node.js%20CI/badge.svg)
 
 ## Config Difference Generator
 
