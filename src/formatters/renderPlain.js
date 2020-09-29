@@ -1,6 +1,7 @@
+import _ from 'lodash';
 
 const stringify = (value) => {
-  if (value instanceof Object) {
+  if (_.isObject(value)) {
     return '[complex value]';
   }
   if (typeof value === 'string') {
@@ -10,34 +11,25 @@ const stringify = (value) => {
   return value;
 };
 
-const renderPlain = (ast, prefix = '') => {
-  const validPrefix = prefix === '' ? '' : `${prefix}.`;
+const renderNode = (node, path = '', renderPlainFunc) => {
+  const {
+    name, type, value, newValue, oldValue, children,
+  } = node;
+  const currentPath = path === '' ? `${path}${name}` : `${path}.${name}`;
 
-  const result = ast.map((node) => {
-    const {
-      name,
-      type,
-      value,
-      newValue,
-      oldValue,
-      children,
-    } = node;
+  const mapping = {
+    nested: () => renderPlainFunc(children, currentPath),
+    changed: () => `Property '${currentPath}' was changed from ${stringify(oldValue)} to ${stringify(newValue)}`,
+    added: () => `Property '${currentPath}' was added with value: ${stringify(value)}`,
+    deleted: () => `Property '${currentPath}' was deleted`,
+    unchanged: () => null,
+  };
 
-    switch (type) {
-      case 'nested':
-        return renderPlain(children, `${validPrefix}${name}`);
-      case 'unchanged':
-        return null;
-      case 'changed':
-        return `Property '${validPrefix}${name}' was changed from ${stringify(oldValue)} to ${stringify(newValue)}`;
-      case 'added':
-        return `Property '${validPrefix}${name}' was added with value: ${stringify(value)}`;
-      case 'deleted':
-        return `Property '${validPrefix}${name}' was deleted`;
-      default:
-        throw new Error(`ERROR: unknown node type - ${type}`);
-    }
-  });
+  return mapping[type]();
+};
+
+const renderPlain = (ast, path = '') => {
+  const result = ast.map((node) => renderNode(node, path, renderPlain));
 
   return result
     .filter((item) => item !== null)

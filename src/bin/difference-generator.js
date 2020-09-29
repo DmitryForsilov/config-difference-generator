@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import program from 'commander';
 import makeDiff from '../index.js';
 
@@ -10,6 +9,7 @@ program
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
     const diff = makeDiff(firstConfig, secondConfig, program.format);
+
     console.log(diff);
   });
 

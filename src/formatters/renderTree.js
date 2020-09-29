@@ -1,54 +1,53 @@
 
-const makeIndent = (count) => `${' '.repeat(count)}`;
+const createIndent = (count) => `${' '.repeat(count)}`;
 const defaultIndent = 4;
+
+const createNodeIndent = (nodeType, depth) => {
+  const currentIndent = defaultIndent * depth;
+  const indentCount = nodeType === 'nested' || nodeType === 'unchanged'
+    ? currentIndent
+    : currentIndent - 2;
+
+  return createIndent(indentCount);
+};
 
 const stringify = (value, depth) => {
   if (!(value instanceof Object)) {
-    return value;
+    return `${value}`;
   }
 
-  const keys = Object.keys(value);
+  const entries = Object.entries(value);
+  const indent = createIndent(defaultIndent * (depth + 1));
+  const bracketIndent = createIndent((defaultIndent * depth));
 
-  return keys.map((key) => {
-    const currentValue = value[key];
+  const processedValue = entries.map(([key, currentValue]) => `${indent}${key}: ${currentValue}`);
 
-    return `{\n${makeIndent(defaultIndent * depth)}${key}: ${currentValue}\n${makeIndent((defaultIndent * depth) - defaultIndent)}}`;
-  });
+  return `{\n${processedValue.join('\n')}\n${bracketIndent}}`;
 };
 
-const renderTree = (ast, depth = 1) => {
-  const result = ast.map((node) => {
-    const {
-      name,
-      type,
-      value,
-      newValue,
-      oldValue,
-      children,
-    } = node;
+const renderNode = (node, depth, renderTreeFunc) => {
+  const {
+    name, type, value, newValue, oldValue, children,
+  } = node;
+  const indent = createNodeIndent(type, depth);
 
-    switch (type) {
-      case 'nested':
-        return `${makeIndent(defaultIndent * depth)}${name}: ${renderTree(children, depth + 1)}`;
-      case 'unchanged':
-        return `${makeIndent(defaultIndent * depth)}${name}: ${stringify(value, depth + 1)}`;
-      case 'changed':
-      {
-        const stringWithPlus = `${makeIndent((defaultIndent * depth) - 2)}+ ${name}: ${stringify(newValue, depth + 1)}`;
-        const stringWithMinus = `${makeIndent((defaultIndent * depth) - 2)}- ${name}: ${stringify(oldValue, depth + 1)}`;
+  const mapping = {
+    nested: () => `${indent}${name}: {\n${renderTreeFunc(children, depth + 1)}\n${indent}}`,
+    unchanged: () => `${indent}${name}: ${stringify(value, depth)}`,
+    changed: () => `${indent}+ ${name}: ${stringify(newValue, depth)}\n${indent}- ${name}: ${stringify(oldValue, depth)}`,
+    added: () => `${indent}+ ${name}: ${stringify(value, depth)}`,
+    deleted: () => `${indent}- ${name}: ${stringify(value, depth)}`,
+  };
 
-        return `${stringWithPlus}\n${stringWithMinus}`;
-      }
-      case 'added':
-        return `${makeIndent((defaultIndent * depth) - 2)}+ ${name}: ${stringify(value, depth + 1)}`;
-      case 'deleted':
-        return `${makeIndent((defaultIndent * depth) - 2)}- ${name}: ${stringify(value, depth + 1)}`;
-      default:
-        throw new Error(`ERROR: unknown node type - ${type}`);
-    }
-  });
+  return mapping[type]();
+};
 
-  return `{\n${result.join('\n')}\n${makeIndent((defaultIndent * depth) - defaultIndent)}}`;
+const renderTree = (ast) => {
+  const iterTree = (tree, depth) => tree
+    .map((node) => renderNode(node, depth, iterTree))
+    .join('\n');
+
+  return `{\n${iterTree(ast, 1)}\n}`;
 };
 
 export default renderTree;
