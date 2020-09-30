@@ -1,11 +1,11 @@
 {
   "name": "config-difference-generator",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Compares two configuration files and shows a difference.",
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "gendiff": "src/bin/difference-generator.js"
+    "con-diff-gen": "src/bin/con-diff-gen.js"
   },
   "files": [
     "dist"
