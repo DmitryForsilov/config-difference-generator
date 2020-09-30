@@ -5,7 +5,9 @@
 ## Config Difference Generator
 
 This is utility running from terminal.
+
 Compares two configuration files and shows a difference in three output formats: default, plain and json.
+
 Supported config file types: JSON, YAML and INI.
 
 This project was reviewed by Hexlet.
