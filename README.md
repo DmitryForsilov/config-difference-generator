@@ -25,7 +25,7 @@ gendiff -f [output format] <first-config> <second-config>
 ### Options
 ```
   -V, --version        output the version number
-  -f, --format [type]  output format: tree, plain or json (default: "tree")
+  -f, --format [type]  output format: default, plain or json (default: "default")
   -h, --help           display help for command
 ```
 
