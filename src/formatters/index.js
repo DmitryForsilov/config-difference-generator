@@ -2,7 +2,7 @@ import renderTree from './renderTree.js';
 import renderPlain from './renderPlain.js';
 
 const formatters = {
-  tree: renderTree,
+  default: renderTree,
   plain: renderPlain,
   json: JSON.stringify,
 };

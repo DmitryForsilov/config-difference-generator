@@ -17,7 +17,7 @@ npm i -g config-difference-generator
 ## Usage
 Type in terminal from folder with config files:
 ```
-gendiff -f [format] <first-config> <second-config>
+gendiff -f [output format] <first-config> <second-config>
 ```
 
 ### Options
