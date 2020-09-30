@@ -46,26 +46,20 @@ gendiff -f [output format] <first-config> <second-config>
 
 ## Different config types
 ### JSON
-
-[![asciicast](https://asciinema.org/a/sECpR1T01JfqnquhXrTsyoDvU.svg)](https://asciinema.org/a/sECpR1T01JfqnquhXrTsyoDvU)
+<img width="700" src="./asciinema_svg/jsonInDefault.svg">
 
 ### YAML
-
-[![asciicast](https://asciinema.org/a/EiouKXUCFWPBZS4XpdwFTpMaF.svg)](https://asciinema.org/a/EiouKXUCFWPBZS4XpdwFTpMaF)
+<img width="700" src="./asciinema_svg/yamlInDefault.svg">
 
 ### INI
-
-[![asciicast](https://asciinema.org/a/LBOHvgOi4rmFoaRp86ORwp58Y.svg)](https://asciinema.org/a/LBOHvgOi4rmFoaRp86ORwp58Y)
+<img width="700" src="./asciinema_svg/iniInDefault.svg">
 
 ## Output formats
 ### Default
-
-[![asciicast](https://asciinema.org/a/AcdxlPbDbcRPQYuyK7E4g3ABR.svg)](https://asciinema.org/a/AcdxlPbDbcRPQYuyK7E4g3ABR)
+<img width="700" src="./asciinema_svg/defaultFormat.svg">
 
 ### Plain
-
-[![asciicast](https://asciinema.org/a/tsEj55MBcKddrtGlutBZKTjxZ.svg)](https://asciinema.org/a/tsEj55MBcKddrtGlutBZKTjxZ)
+<img width="700" src="./asciinema_svg/plainFormat.svg">
 
 ### Json
-
-[![asciicast](https://asciinema.org/a/eVMjePkJ3NwcS9TGvOwMjrfBO.svg)](https://asciinema.org/a/eVMjePkJ3NwcS9TGvOwMjrfBO)
+<img width="700" src="./asciinema_svg/jsonFormat.svg">
