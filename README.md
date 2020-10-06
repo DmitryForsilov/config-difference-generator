@@ -37,9 +37,9 @@ gendiff -f [output format] <first-config> <second-config>
 - **eslint**
 
 ## Different config types in default output format
- - [JSON](https://github.com/DmitryForsilov/config-difference-generator/#json-difference)
- - [YAML](https://github.com/DmitryForsilov/config-difference-generator/#yaml-difference)
- - [INI](https://github.com/DmitryForsilov/config-difference-generator/#ini-difference)
+ - [JSON](https://github.com/DmitryForsilov/config-difference-generator/#json-type)
+ - [YAML](https://github.com/DmitryForsilov/config-difference-generator/#yaml-type)
+ - [INI](https://github.com/DmitryForsilov/config-difference-generator/#ini-type)
 
 ## Output formats
  - [Default](https://github.com/DmitryForsilov/config-difference-generator/#default)
@@ -47,13 +47,13 @@ gendiff -f [output format] <first-config> <second-config>
  - [Json](https://github.com/DmitryForsilov/config-difference-generator/#json)
 
 ## Different config types
-### JSON
+### JSON type
 <img width="700" src="./asciinema_svg/jsonInDefault.svg">
 
-### YAML
+### YAML type
 <img width="700" src="./asciinema_svg/yamlInDefault.svg">
 
-### INI
+### INI type
 <img width="700" src="./asciinema_svg/iniInDefault.svg">
 
 ## Output formats
